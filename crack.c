@@ -24,7 +24,8 @@ int tryguess(char *hash, char *guess)
     // Hash the guess using MD5
     char *check = md5(guess, strlen(guess));
     // Compare the two hashes
-    if (strcmp (check, guess) == 0)
+   // printf("comparing %s, %s\n", hash, check);
+    if (strcmp (check, hash) == 0)
     {
         free(check);
         return 1;
@@ -122,13 +123,15 @@ int main(int argc, char *argv[])
     // For each hash, try every entry in the dictionary.
     // Print the matching dictionary entry.
     // Need two nested loops.
+    
+    
     while (fgets (hashwrite, 34, d) != NULL)
     {
         hashwrite[strlen(hashwrite) - 1] = '\0';
         
         for (int i = 0; i < dlen; i++)
         {
-            printf("comparing %s, %s\n", hashwrite, dict[i]);
+            //printf("comparing %s, %s\n", hashwrite, dict[i]);
             if (tryguess(hashwrite, dict[i]) == 1)
             {
                 printf("I'm in. %s, %s\n", hashwrite, dict[i]);
